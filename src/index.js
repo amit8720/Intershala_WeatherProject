@@ -141,3 +141,48 @@ async function fetchWeatherData(endpoint, location) { // Receive location parame
         document.getElementById('searchBtn').disabled = false;
     }
 }
+
+async function searchWeather() {
+    const cityInput = document.getElementById('cityInput');
+    const city = cityInput.value.trim();
+
+    if (city) {
+        // Disable the search button and show loading state
+        document.getElementById('weatherCards').innerHTML = '<p>Loading...</p>';
+        document.getElementById('searchBtn').disabled = true;
+
+        // Call getWeather to fetch data
+        getWeather(city);
+
+        // Update recently searched cities
+        updateRecentCities(city);
+
+        // Clear input field after search
+        cityInput.value = '';
+    } else {
+        alert('Please enter a city name');
+    }
+}
+
+
+// Function to handle selection from dropdown
+document.getElementById('recentCitiesDropdown').addEventListener('change', function () {
+    const selectedCity = this.value;
+    if (selectedCity) {
+        // Update weather for the selected city
+        getWeather(selectedCity);
+    }
+});
+
+// Validate input on search button click
+document.getElementById('searchBtn').addEventListener('click', function () {
+    searchWeather();
+});
+
+// Validate input on pressing Enter key in input field
+document.getElementById('cityInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        searchWeather();
+    }
+});
+
