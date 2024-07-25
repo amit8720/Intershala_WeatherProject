@@ -185,4 +185,17 @@ document.getElementById('cityInput').addEventListener('keypress', function (e) {
         searchWeather();
     }
 });
+// Fetch weather for current location on button click
+document.getElementById('currentLocationBtn').addEventListener('click', function () {
+    // Show confirmation popup
+    if (confirm("Allow this website to access your location?")) {
+        // Disable the search button and show loading state
+        document.getElementById('weatherCards').innerHTML = '<p>Loading...</p>';
+        document.getElementById('searchBtn').disabled = true;
 
+        // Call getWeather to fetch data for current location
+        getWeather('current');
+    } else {
+        alert('Permission denied. Please enter a city name manually.');
+    }
+});
