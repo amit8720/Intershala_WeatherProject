@@ -30,5 +30,29 @@
                         <span
                             class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Search</span>
                     </a>
+                    <button id="currentLocationBtn">
+                        <a href="#_"
+                            class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                            <span
+                                class="w-48 h-48 rounded rotate-[-40deg] bg-yellow-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                            <span
+                                class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Current
+                                Location</span>
+                        </a>
+                    </button>
+            </div>
+        </div>
+    </header>
+    <div class="recent-cities mt-4 mx-6">
+        <select id="recentCitiesDropdown"
+            class="w-64 px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500">
+            <option value="">Recently Searched Cities</option>
+        </select>  
+    </div>
+    <div id="searchedCity" class="searched-city text-center text-xl font-bold mt-4"></div>
+    <div id="weatherCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-9 mt-5 mx-6">
+    </div>
+
+    <script src="index.js"></script>
 </body>
 </html>
