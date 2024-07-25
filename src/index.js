@@ -199,3 +199,56 @@ document.getElementById('currentLocationBtn').addEventListener('click', function
         alert('Permission denied. Please enter a city name manually.');
     }
 });
+
+
+// Load weather for current location on page load
+window.addEventListener('load', () => {
+    // Function to ask for permission to access geolocation
+    function askForLocationPermission() {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        resolve(position.coords);
+                    },
+                    error => {
+                        console.error('Error getting geolocation:', error);
+                        reject(error);
+                    }
+                );
+            } else {
+                reject(new Error('Geolocation is not supported by this browser.'));
+            }
+        });
+    }
+
+    // Show confirmation popup
+    if (confirm("Allow this website to access your location for accurate weather information?")) {
+        // Disable the search button and show loading state
+        document.getElementById('weatherCards').innerHTML = '<p>Loading...</p>';
+        document.getElementById('searchBtn').disabled = true;
+
+        // Attempt to get current location
+        askForLocationPermission()
+            .then(coords => {
+                const { latitude, longitude } = coords;
+                const apiKey = 'e28b2a3e5dbb6215c04594cb3d890f1d';
+                const endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+                // Call getWeather to fetch data for current location
+                getWeather('current');
+                updateRecentCitiesDropdown();
+            })
+            .catch(error => {
+                console.error('Error getting location:', error);
+                alert('Error getting geolocation. Fetching weather for a default location.');
+                getWeather('New York'); // Example default location, or prompt for manual entry
+                updateRecentCitiesDropdown();
+            });
+    } else {
+        alert('Permission denied. Fetching weather for a default location.');
+        getWeather('New York'); // Example default location, or prompt for manual entry
+        updateRecentCitiesDropdown();
+    }
+});
+
