@@ -252,3 +252,22 @@ window.addEventListener('load', () => {
     }
 });
 
+// Function to get background image URL based on weather condition
+function getBackgroundImage(weatherCondition) {
+    switch (weatherCondition) {
+        case 'thunderstorm':
+            return 'https://cdn.pixabay.com/photo/2019/02/22/13/26/lightning-4013539_1280.jpg';
+        case 'drizzle':
+            return 'https://cdn.pixabay.com/photo/2019/10/30/21/44/gods-gift-4590622_1280.jpg';
+        case 'rain':
+            return 'https://cdn.pixabay.com/photo/2015/09/09/21/16/raindrops-933424_1280.jpg';
+        case 'snow':
+            return 'https://cdn.pixabay.com/photo/2017/12/02/17/47/wintry-2993370_1280.jpg';
+        case 'clear':
+            return 'https://cdn.pixabay.com/photo/2018/11/04/11/49/dawn-3793717_1280.jpg';
+        case 'clouds':
+            return 'https://cdn.pixabay.com/photo/2021/11/17/17/47/sky-6804245_1280.jpg';
+        default:
+            return 'https://cdn.pixabay.com/photo/2021/03/11/02/57/mountain-6086083_1280.jpg';
+    }
+}
